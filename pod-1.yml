@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: apache-pod
+  namespace: application
+  labels:
+    app: apache
+
+spec:
+  containers:
+  - name: apache-container
+    image: paketobuildpacks/httpd:0.7
+    command: ["httpd", "-D", "FOREGROUND"]
+
+    ports:
+    - containerPort: 80
+    
+    
+
+
+# Some images already know what to do by default, but this image (paketobuildpacks/httpd) needs you to say exactly what to run.
+
+# So, by giving this command, you are telling the container:
+
+# "Hey, please start the Apache web server now!"
+
+# Without this command, the container doesn’t know what to do, so it fails to start.
+
+
+
+
+
+
+
+
+

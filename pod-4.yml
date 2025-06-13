@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pi
+spec:
+  containers:
+  - name: pi
+    image: perl:5.34.0
+    command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(5000)"]
+  restartPolicy: Never
+
+
+
+# Pod YAML: defines containers directly under spec.containers
+
+# Deployment/Job YAML: uses spec.template to describe the Pod template that it creates
+
+# backoffLimit: used only in Job to set retry limit on failures, not in Pod
+

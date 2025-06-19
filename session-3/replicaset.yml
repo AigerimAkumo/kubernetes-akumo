@@ -1,0 +1,51 @@
+
+
+# Match Label example
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:  # meaning it is supporting mutilple labels/ Equality based selector (basic) =, !=
+      tier: frontend
+  template:  # Pod template 
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.21
+
+
+---
+
+ # Match expression
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: backend
+spec:
+  replicas: 3
+  selector:
+    matchExpression:  # replicaSet will manage Pods that has a label "app" with values of either web or api
+    - key: app
+      operator: In
+      values:
+         - web
+         - api
+    - key: stage # replicaSet will manage Pods that do not have stage: dev
+      operator: NotIn
+      values:
+         - dev  
+  template:  # Pod template 
+    metadata:
+      labels:
+        app: web
+        stage: prod
+    spec:
+      containers:
+      - name: nginx
+        image: nginx       

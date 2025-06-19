@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-service
+spec:
+  selector:    # it's a label selector, to find all the pods that has app: simple
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80         # Service port
+      targetPort: 80   # Container port
+
+
+      # Default service called ClusterIP

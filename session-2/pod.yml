@@ -1,0 +1,14 @@
+apiVersion: v1                  # API version of the Kubernetes object
+kind: Pod                       # Type of the object, in this case, a Pod
+metadata:                       # Metadata for the Pod(can include labels, name, etc.)
+  name: nginx-pod               # Name of the Pod
+  labels:                       # Labels for the Pod
+    env: development            # Environment label
+    tier: frontend              # Tier label  
+spec:                           # Specification for the Pod(volume mounts, containers, etc.)
+  containers:                   # List of containers in the Pod
+  - image: nginx                # Docker image to use for the container
+    name: nginx-container       # Name of the container
+    ports:                      # Ports to expose from the container
+    - containerPort: 80         # Port number inside the container
+      protocol: TCP             # Protocol used for the port

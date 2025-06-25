@@ -1,0 +1,21 @@
+
+## Create a pod with httpd image, use the same pvc ,mount it at /data
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backup-pod
+spec:
+  volumes:
+    - name: app-pv-storage
+      persistentVolumeClaim:
+        claimName: app-volume-claim
+  containers:
+    - name: backup-container
+      image: httpd
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/data"
+          name: app-pv-storage
